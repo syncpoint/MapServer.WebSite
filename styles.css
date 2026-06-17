@@ -435,6 +435,79 @@ h2 {
   line-height: 1.5;
 }
 
+/* Legal pages */
+.legal {
+  max-width: 760px;
+}
+
+.legal > p.legal-updated {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+}
+
+.legal h2 {
+  font-size: 28px;
+  margin-bottom: 1rem;
+}
+
+.legal h3 {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 2.5rem 0 0.75rem;
+}
+
+.legal p,
+.legal li {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.legal p {
+  margin-bottom: 1rem;
+}
+
+.legal ul,
+.legal ol {
+  margin: 0 0 1rem 1.25rem;
+}
+
+.legal li {
+  margin-bottom: 0.5rem;
+}
+
+.legal a {
+  color: var(--green);
+  text-decoration: none;
+}
+
+.legal a:hover {
+  text-decoration: underline;
+}
+
+.legal strong {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.legal .placeholder {
+  color: var(--green);
+}
+
+.callout {
+  background: rgba(29, 158, 117, 0.06);
+  border: 0.5px solid rgba(29, 158, 117, 0.3);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.callout p {
+  margin-bottom: 0;
+}
+
 /* Footer */
 footer {
   border-top: 0.5px solid var(--border);
