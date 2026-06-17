@@ -1,0 +1,493 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --green: #1D9E75;
+  --green-dark: #0F6E56;
+  --green-darker: #085041;
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --text-primary: #e6edf3;
+  --text-muted: #8b949e;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.15);
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Nav */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  border-bottom: 0.5px solid var(--border);
+  flex-wrap: wrap;
+  gap: 1rem;
+  position: sticky;
+  top: 0;
+  background: var(--bg-primary);
+  z-index: 100;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.nav-logo-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  font-size: 14px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.nav-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Language toggle */
+.lang-toggle {
+  display: flex;
+  background: rgba(255, 255, 255, 0.06);
+  border: 0.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.lang-btn {
+  padding: 5px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  transition: all 0.15s;
+}
+
+.lang-btn.active {
+  background: var(--green);
+  color: #fff;
+}
+
+/* Hero */
+.hero {
+  padding: 5rem 2rem 4rem;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 12px;
+  color: var(--green);
+  background: rgba(29, 158, 117, 0.12);
+  border: 0.5px solid rgba(29, 158, 117, 0.3);
+  border-radius: 20px;
+  padding: 4px 14px;
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+h1 span {
+  color: var(--green);
+}
+
+.hero-sub {
+  font-size: 18px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 580px;
+  margin: 0 auto 2.5rem;
+}
+
+.cta-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--green);
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.15s;
+}
+
+.btn-primary:hover {
+  background: var(--green-dark);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-muted);
+  border: 0.5px solid var(--border-hover);
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.15s;
+}
+
+.btn-secondary:hover {
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Stats bar */
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  padding: 2.5rem 2rem;
+  border-top: 0.5px solid var(--border);
+  border-bottom: 0.5px solid var(--border);
+  margin: 0 2rem;
+  flex-wrap: wrap;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-val {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.stat-lbl {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Sections */
+section {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.section-label {
+  font-size: 12px;
+  color: var(--green);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.section-sub {
+  font-size: 16px;
+  color: var(--text-muted);
+  margin-bottom: 3rem;
+  line-height: 1.6;
+}
+
+/* Features grid */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 0.5px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.feature {
+  background: var(--bg-primary);
+  padding: 1.5rem;
+}
+
+.feature-icon {
+  font-size: 20px;
+  color: var(--green);
+  margin-bottom: 0.75rem;
+}
+
+.feature h3 {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+}
+
+.feature p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Divider */
+.divider {
+  border: none;
+  border-top: 0.5px solid var(--border);
+  margin: 0 2rem;
+}
+
+/* Pricing */
+.pricing {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.price-card {
+  background: var(--bg-secondary);
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.price-card.featured {
+  border-color: rgba(29, 158, 117, 0.5);
+  background: rgba(29, 158, 117, 0.04);
+}
+
+.price-tag {
+  font-size: 12px;
+  color: var(--green);
+  background: rgba(29, 158, 117, 0.12);
+  border-radius: 20px;
+  padding: 3px 10px;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.price-name {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+}
+
+.price-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.price-amount {
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.price-amount span {
+  font-size: 16px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.price-note {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 1.75rem;
+}
+
+.price-features {
+  list-style: none;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+.price-features li {
+  font-size: 14px;
+  color: var(--text-muted);
+  padding: 6px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.price-features li i {
+  color: var(--green);
+  font-size: 16px;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+
+.support-hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  border-top: 0.5px solid var(--border);
+  padding-top: 1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.support-hint strong {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.price-card .btn-primary,
+.price-card .btn-secondary {
+  width: 100%;
+  text-align: center;
+  display: block;
+}
+
+/* Installation steps */
+.install-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.install-step {
+  background: var(--bg-secondary);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem;
+}
+
+.step-num {
+  font-size: 12px;
+  color: var(--green);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.install-step h3 {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 0.3rem;
+}
+
+.install-step p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Footer */
+footer {
+  border-top: 0.5px solid var(--border);
+  padding: 2rem;
+  text-align: center;
+}
+
+footer p {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+footer a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+footer a:hover {
+  color: var(--text-primary);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 32px;
+  }
+
+  .pricing {
+    grid-template-columns: 1fr;
+  }
+
+  .stats {
+    gap: 1.5rem;
+  }
+
+  nav {
+    padding: 1rem;
+  }
+
+  .hero {
+    padding: 3rem 1.5rem 2.5rem;
+  }
+
+  section {
+    padding: 3rem 1.5rem;
+  }
+
+  .divider {
+    margin: 0 1.5rem;
+  }
+
+  .stats {
+    margin: 0 1.5rem;
+  }
+}

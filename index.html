@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Syncpoint Map Server — digitale Karten direkt von Deinem Gerät. Ohne Cloud, ohne Internetverbindung, ohne laufende Kosten. Windows-native, MSI-Installer, MBTiles, PMTiles, COG, PostGIS.">
+  <title>Syncpoint Map Server</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-dot"></div>
+    Syncpoint Map Server
+  </a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#features" data-de="Features" data-en="Features">Features</a>
+      <a href="#install" data-de="Installation" data-en="Installation">Installation</a>
+      <a href="#pricing" data-de="Preise" data-en="Pricing">Preise</a>
+    </div>
+    <div class="lang-toggle">
+      <button class="lang-btn" id="btn-de" onclick="setLang('de')">DE</button>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="badge" data-de="Windows · Laptop oder Server · Offline-first" data-en="Windows · Laptop or server · Offline-first"></div>
+  <h1 id="hero-title"></h1>
+  <p class="hero-sub" data-de="Syncpoint Map Server liefert digitale Karten direkt von Deinem Gerät — ohne Cloud, ohne Internetverbindung, ohne laufende Kosten." data-en="Syncpoint Map Server serves map tiles directly from your device — no cloud, no internet connection, no recurring costs."></p>
+  <div class="cta-group">
+    <a href="#pricing" class="btn-primary" data-de="Jetzt kaufen" data-en="Buy now">Jetzt kaufen</a>
+    <a href="#features" class="btn-secondary" data-de="Mehr erfahren" data-en="Learn more">Mehr erfahren</a>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat">
+    <div class="stat-val">5 min</div>
+    <div class="stat-lbl" data-de="bis zum ersten Tile" data-en="to your first tile"></div>
+  </div>
+  <div class="stat">
+    <div class="stat-val">0 €</div>
+    <div class="stat-lbl" data-de="laufende Kosten" data-en="recurring costs"></div>
+  </div>
+  <div class="stat">
+    <div class="stat-val" data-de="MBTiles · PMTiles · COG · PostGIS" data-en="MBTiles · PMTiles · COG · PostGIS"></div>
+    <div class="stat-lbl" data-de="unterstützte Datenquellen" data-en="supported data sources"></div>
+  </div>
+  <div class="stat">
+    <div class="stat-val">Offline-first</div>
+    <div class="stat-lbl" data-de="kein Internet erforderlich" data-en="no internet required"></div>
+  </div>
+</div>
+
+<section id="features">
+  <div class="section-label" data-de="Features" data-en="Features"></div>
+  <h2 data-de="Alles was Du brauchst" data-en="Everything you need"></h2>
+  <p class="section-sub" data-de="Für alle, die digitale Karten unabhängig vom Internet nutzen wollen — ob auf dem Laptop im Gelände oder als Windows-Dienst im Netzwerk." data-en="For anyone who wants to use digital maps independently of the internet — whether on a laptop in the field or as a Windows service on the network."></p>
+  <div class="features">
+    <div class="feature">
+      <div class="feature-icon"><i class="ti ti-device-laptop" aria-hidden="true"></i></div>
+      <h3 data-de="Laptop oder Server" data-en="Laptop or server"></h3>
+      <p data-de="Im Benutzerkontext läuft der Map Server als SysTray-App auf Deinem Windows-Gerät. Im Maschinenkontext als nativer Windows-Dienst — automatisch verfügbar im ganzen Netzwerk." data-en="In user context, the map server runs as a system tray app on your Windows device. In machine context, as a native Windows service — automatically available across the network."></p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon"><i class="ti ti-database" aria-hidden="true"></i></div>
+      <h3 data-de="Flexible Datenquellen" data-en="Flexible data sources"></h3>
+      <p data-de="Unterstützt MBTiles, PMTiles und Cloud Optimized GeoTIFF (COG) als Datei-Quellen sowie PostgreSQL/PostGIS für vektorbasierte Tile-Generierung direkt aus der Datenbank." data-en="Supports MBTiles, PMTiles, and Cloud Optimized GeoTIFF (COG) as file sources, as well as PostgreSQL/PostGIS for vector tile generation directly from the database."></p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon"><i class="ti ti-brand-windows" aria-hidden="true"></i></div>
+      <h3 data-de="Native Windows-Integration" data-en="Native Windows integration"></h3>
+      <p data-de="Systray-Icon für Schnellzugriff. Dienst starten und stoppen ohne Terminal oder Kommandozeile." data-en="System tray icon for quick access. Start and stop without a terminal or command line."></p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon"><i class="ti ti-settings" aria-hidden="true"></i></div>
+      <h3 data-de="Management UI" data-en="Management UI"></h3>
+      <p data-de="Datenbank-Ordner direkt aus dem Systray-Menü öffnen. MBTiles und PMTiles einfach ablegen — fertig." data-en="Open the database folder directly from the system tray menu. Drop in MBTiles or PMTiles files and you're done."></p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon"><i class="ti ti-wifi-off" aria-hidden="true"></i></div>
+      <h3 data-de="Vollständig offline-fähig" data-en="Fully air-gap capable"></h3>
+      <p data-de="Kein Cloud-Endpoint, keine Telemetrie, keine Internetverbindung erforderlich." data-en="No cloud endpoint, no telemetry, no internet connection required."></p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon"><i class="ti ti-refresh" aria-hidden="true"></i></div>
+      <h3 data-de="Lifetime Updates" data-en="Lifetime updates"></h3>
+      <p data-de="Einmalig kaufen, alle zukünftigen Versionen inklusive. Kein Abo, keine Verlängerungsgebühren." data-en="Buy once, all future versions included. No subscription, no renewal fees."></p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="install">
+  <div class="section-label" data-de="Installation" data-en="Installation"></div>
+  <h2 data-de="In drei Schritten produktiv" data-en="Up and running in three steps"></h2>
+  <p class="section-sub" data-de="Kein Docker, kein Linux, kein WSL. Ein MSI-Installer, der auf jedem Windows 10/11 Gerät läuft." data-en="No Docker, no Linux, no WSL. A single MSI installer that runs on any Windows 10/11 device."></p>
+  <div class="install-grid">
+    <div class="install-step">
+      <div class="step-num" data-de="Schritt 1" data-en="Step 1"></div>
+      <h3 data-de="MSI herunterladen" data-en="Download the MSI"></h3>
+      <p data-de="Nach dem Kauf erhältst Du sofort einen Download-Link für den Installer." data-en="After purchase, you immediately receive a download link for the installer."></p>
+    </div>
+    <div class="install-step">
+      <div class="step-num" data-de="Schritt 2" data-en="Step 2"></div>
+      <h3 data-de="Installieren &amp; konfigurieren" data-en="Install &amp; configure"></h3>
+      <p data-de="Benutzer- oder Maschinenkontext wählen. Installation dauert unter einer Minute." data-en="Choose user or machine context. Installation takes under a minute."></p>
+    </div>
+    <div class="install-step">
+      <div class="step-num" data-de="Schritt 3" data-en="Step 3"></div>
+      <h3 data-de="Datenquelle ablegen" data-en="Add your data source"></h3>
+      <p data-de="MBTiles, PMTiles oder COG in den vordefinierten Ordner kopieren — oder PostGIS verbinden. Dienst starten — fertig." data-en="Copy MBTiles, PMTiles, or COG files into the predefined folder — or connect PostGIS. Start the service — done."></p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="pricing">
+  <div class="section-label" data-de="Preise" data-en="Pricing"></div>
+  <h2 data-de="Einmalig kaufen, dauerhaft nutzen" data-en="Buy once, use forever"></h2>
+  <p class="section-sub" data-de="Keine Abonnements, keine versteckten Gebühren. Alle zukünftigen Updates sind im Kaufpreis enthalten." data-en="No subscriptions, no hidden fees. All future updates are included in the purchase price."></p>
+  <div class="pricing">
+    <div class="price-card">
+      <div class="price-tag" data-de="Personal" data-en="Personal"></div>
+      <div class="price-name" data-de="Persönliche Lizenz" data-en="Personal license"></div>
+      <div class="price-desc" data-de="Für Einzelpersonen und private Projekte." data-en="For individuals and personal projects."></div>
+      <div class="price-amount">€ 49</div>
+      <div class="price-note" data-de="inkl. MwSt." data-en="incl. VAT"></div>
+      <ul class="price-features">
+        <li><i class="ti ti-check" aria-hidden="true"></i><span data-de="Eine Installation" data-en="Single installation"></span></li>
+        <li><i class="ti ti-check" aria-hidden="true"></i><span data-de="Lifetime Updates" data-en="Lifetime updates"></span></li>
+        <li><i class="ti ti-check" aria-hidden="true"></i><span data-de="Sofort-Download nach Kauf" data-en="Instant download after purchase"></span></li>
+      </ul>
+      <a href="#" class="btn-secondary" data-de="Jetzt kaufen" data-en="Buy now">Jetzt kaufen</a>
+    </div>
+    <div class="price-card featured">
+      <div class="price-tag" data-de="Organisation" data-en="Organisation"></div>
+      <div class="price-name" data-de="Organisationslizenz" data-en="Organisation license"></div>
+      <div class="price-desc" data-de="Für Unternehmen und Institutionen. Gilt für eine eigenständige Organisationseinheit." data-en="For companies and institutions. Valid for one independent organisational unit."></div>
+      <div class="price-amount">€ 999</div>
+      <div class="price-note" data-de="zzgl. MwSt., einmalig" data-en="excl. VAT, one-time"></div>
+      <ul class="price-features">
+        <li><i class="ti ti-check" aria-hidden="true"></i><span data-de="Unbegrenzte Installationen innerhalb der Organisation" data-en="Unlimited installations within the organisation"></span></li>
+        <li><i class="ti ti-check" aria-hidden="true"></i><span data-de="Lifetime Updates" data-en="Lifetime updates"></span></li>
+        <li><i class="ti ti-check" aria-hidden="true"></i><span data-de="Automatisiertes Deployment (MSI/GPO)" data-en="Automated deployment (MSI/GPO)"></span></li>
+        <li><i class="ti ti-check" aria-hidden="true"></i><span data-de="Sofort-Download nach Kauf" data-en="Instant download after purchase"></span></li>
+      </ul>
+      <div class="support-hint" data-de="&lt;strong&gt;Optional:&lt;/strong&gt; Support Contract für € 200/Jahr — priorisierte Bugfixes und direkter E-Mail-Support mit Antwort innerhalb von 2 Werktagen." data-en="&lt;strong&gt;Optional:&lt;/strong&gt; Support contract for € 200/year — prioritised bug fixes and direct email support with a 2-business-day response time."></div>
+      <a href="#" class="btn-primary" data-de="Jetzt kaufen" data-en="Buy now">Jetzt kaufen</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 <a href="https://syncpoint.io">Syncpoint GmbH</a> · <a href="#" data-de="Lizenzbedingungen" data-en="License terms">Lizenzbedingungen</a> · <a href="mailto:office@syncpoint.io">office@syncpoint.io</a></p>
+</footer>
+
+<script>
+  const heroTitles = {
+    de: 'Deine digitale Karte.<br><span>Auf Deinem Gerät.</span>',
+    en: 'Your map data.<br><span>On your device.</span>'
+  };
+
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.getElementById('hero-title').innerHTML = heroTitles[lang];
+    document.querySelectorAll('[data-de]').forEach(el => {
+      const t = el.getAttribute('data-' + lang);
+      if (!t || el.id === 'hero-title') return;
+      if (el.classList.contains('support-hint')) {
+        el.innerHTML = t.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+      } else {
+        el.textContent = t;
+      }
+    });
+    document.getElementById('btn-de').classList.toggle('active', lang === 'de');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    localStorage.setItem('lang', lang);
+  }
+
+  const saved = localStorage.getItem('lang');
+  const browserLang = (navigator.language || 'en').toLowerCase().startsWith('de') ? 'de' : 'en';
+  setLang(saved || browserLang);
+</script>
+
+</body>
+</html>
