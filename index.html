@@ -131,21 +131,21 @@
       <div class="price-tag" data-de="Personal" data-en="Personal"></div>
       <div class="price-name" data-de="Persönliche Lizenz" data-en="Personal license"></div>
       <div class="price-desc" data-de="Für Einzelpersonen und private Projekte." data-en="For individuals and personal projects."></div>
-      <div class="price-amount">€ 49</div>
-      <div class="price-note" data-de="inkl. MwSt." data-en="incl. VAT"></div>
+      <div class="price-amount" data-price-for="personal">€ 49</div>
+      <div class="price-note" data-de="inkl. anwendbarer Steuern" data-en="incl. applicable taxes"></div>
       <ul class="price-features">
         <li><i class="ti ti-check" aria-hidden="true"></i><span data-de="Eine Installation" data-en="Single installation"></span></li>
         <li><i class="ti ti-check" aria-hidden="true"></i><span data-de="Lifetime Updates" data-en="Lifetime updates"></span></li>
         <li><i class="ti ti-check" aria-hidden="true"></i><span data-de="Sofort-Download nach Kauf" data-en="Instant download after purchase"></span></li>
       </ul>
-      <a href="#" class="btn-secondary" data-de="Jetzt kaufen" data-en="Buy now">Jetzt kaufen</a>
+      <a href="#" class="btn-secondary" data-paddle-checkout="personal" data-de="Jetzt kaufen" data-en="Buy now">Jetzt kaufen</a>
     </div>
     <div class="price-card featured">
       <div class="price-tag" data-de="Organisation" data-en="Organisation"></div>
       <div class="price-name" data-de="Organisationslizenz" data-en="Organisation license"></div>
       <div class="price-desc" data-de="Für Unternehmen und Institutionen. Gilt für eine eigenständige Organisationseinheit." data-en="For companies and institutions. Valid for one independent organisational unit."></div>
-      <div class="price-amount">€ 999</div>
-      <div class="price-note" data-de="zzgl. MwSt., einmalig" data-en="excl. VAT, one-time"></div>
+      <div class="price-amount" data-price-for="organisation">€ 999</div>
+      <div class="price-note" data-de="inkl. anwendbarer Steuern, einmalig" data-en="incl. applicable taxes, one-time"></div>
       <ul class="price-features">
         <li><i class="ti ti-check" aria-hidden="true"></i><span data-de="Unbegrenzte Installationen innerhalb der Organisation" data-en="Unlimited installations within the organisation"></span></li>
         <li><i class="ti ti-check" aria-hidden="true"></i><span data-de="Lifetime Updates" data-en="Lifetime updates"></span></li>
@@ -153,7 +153,7 @@
         <li><i class="ti ti-check" aria-hidden="true"></i><span data-de="Sofort-Download nach Kauf" data-en="Instant download after purchase"></span></li>
       </ul>
       <div class="support-hint" data-de="&lt;strong&gt;Optional:&lt;/strong&gt; Support Contract für € 200/Jahr — priorisierte Bugfixes und direkter E-Mail-Support mit Antwort innerhalb von 2 Werktagen." data-en="&lt;strong&gt;Optional:&lt;/strong&gt; Support contract for € 200/year — prioritised bug fixes and direct email support with a 2-business-day response time."></div>
-      <a href="#" class="btn-primary" data-de="Jetzt kaufen" data-en="Buy now">Jetzt kaufen</a>
+      <a href="#" class="btn-primary" data-paddle-checkout="organisation" data-de="Jetzt kaufen" data-en="Buy now">Jetzt kaufen</a>
     </div>
   </div>
 </section>
@@ -188,6 +188,91 @@
   const saved = localStorage.getItem('lang');
   const browserLang = (navigator.language || 'en').toLowerCase().startsWith('de') ? 'de' : 'en';
   setLang(saved || browserLang);
+</script>
+
+<!-- Paddle Billing: dynamische, lokalisierte Preise + Checkout -->
+<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+<script>
+  // === Konfiguration — hier Deine echten Werte aus dem Paddle-Dashboard eintragen ===
+  const PADDLE_CONFIG = {
+    // 'sandbox' zum Testen, 'production' für den Live-Betrieb
+    environment: 'production',
+    // Client-side Token (Paddle > Developer Tools > Authentication), beginnt mit test_ oder live_
+    token: 'live_34d2d6ff7ea531b18e6ec6dd7f9',
+    // Price-IDs der beiden Lizenzen (Paddle > Catalog > Products > Prices), beginnen mit pri_
+    prices: {
+      personal: 'pri_01kvapxk5m5wntf5a2hgc32ec0',
+      organisation: 'pri_01kvaqe5r4p2g7km9jmvzcs8y0'
+    },
+    // Welcher Betrag angezeigt wird: 'total' = inkl. Steuern, 'subtotal' = netto (z. B. für B2B)
+    priceField: 'total'
+  };
+
+  // Liste der angezeigten Tiers: data-Attribut -> Price-ID
+  const PADDLE_TIERS = [
+    { key: 'personal',     priceId: PADDLE_CONFIG.prices.personal },
+    { key: 'organisation', priceId: PADDLE_CONFIG.prices.organisation }
+  ];
+
+  function tokenValid() {
+    return /^(test|live)_/.test(PADDLE_CONFIG.token);
+  }
+
+  // Nur Tiers mit echter Price-ID werden dynamisch; der Rest behält den statischen Preis.
+  function validTiers() {
+    return PADDLE_TIERS.filter(t => /^pri_/.test(t.priceId));
+  }
+
+  function initPaddle() {
+    // Ohne gültigen Token oder ganz ohne konfigurierte Price-ID: statische Preise stehen lassen.
+    if (typeof Paddle === 'undefined' || !tokenValid() || validTiers().length === 0) return;
+
+    if (PADDLE_CONFIG.environment === 'sandbox') {
+      Paddle.Environment.set('sandbox');
+    }
+    Paddle.Initialize({ token: PADDLE_CONFIG.token });
+
+    loadPaddlePrices();
+    wirePaddleCheckout();
+  }
+
+  // Lokalisierte Preise laden (Währung/Steuer nach Standort des Besuchers, IP-basiert)
+  function loadPaddlePrices() {
+    const tiers = validTiers();
+    const items = tiers.map(t => ({ priceId: t.priceId, quantity: 1 }));
+    Paddle.PricePreview({ items })
+      .then(result => {
+        result.data.details.lineItems.forEach(li => {
+          const tier = tiers.find(t => t.priceId === li.price.id);
+          if (!tier) return;
+          const amount = (PADDLE_CONFIG.priceField === 'subtotal'
+            ? li.formattedTotals.subtotal
+            : li.formattedTotals.total);
+          document.querySelectorAll('[data-price-for="' + tier.key + '"]')
+            .forEach(el => { el.textContent = amount; });
+        });
+      })
+      .catch(err => console.error('Paddle PricePreview fehlgeschlagen:', err));
+  }
+
+  // Kauf-Buttons mit dem Paddle-Checkout (Overlay) verbinden — nur für konfigurierte Tiers
+  function wirePaddleCheckout() {
+    const tiers = validTiers();
+    document.querySelectorAll('[data-paddle-checkout]').forEach(btn => {
+      const tier = tiers.find(t => t.key === btn.getAttribute('data-paddle-checkout'));
+      if (!tier) return;
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        Paddle.Checkout.open({ items: [{ priceId: tier.priceId, quantity: 1 }] });
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPaddle);
+  } else {
+    initPaddle();
+  }
 </script>
 
 </body>
