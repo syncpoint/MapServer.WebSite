@@ -242,17 +242,42 @@
     const items = tiers.map(t => ({ priceId: t.priceId, quantity: 1 }));
     Paddle.PricePreview({ items })
       .then(result => {
+        const currency = result.data.currencyCode;
         result.data.details.lineItems.forEach(li => {
           const tier = tiers.find(t => t.priceId === li.price.id);
           if (!tier) return;
-          const amount = (PADDLE_CONFIG.priceField === 'subtotal'
-            ? li.formattedTotals.subtotal
-            : li.formattedTotals.total);
+          const amount = formatPrice(li, currency);
           document.querySelectorAll('[data-price-for="' + tier.key + '"]')
             .forEach(el => { el.textContent = amount; });
         });
       })
       .catch(err => console.error('Paddle PricePreview fehlgeschlagen:', err));
+  }
+
+  // Preis lokalisiert formatieren, aber ohne Nachkommastellen bei ganzzahligen Beträgen.
+  // Rechnet aus dem Rohwert (kleinste Währungseinheit) statt am vorformatierten String zu schneiden.
+  function formatPrice(li, currency) {
+    const field = PADDLE_CONFIG.priceField === 'subtotal' ? 'subtotal' : 'total';
+    const locale = navigator.language || 'en';
+    let digits = 2;
+    try {
+      digits = new Intl.NumberFormat(locale, { style: 'currency', currency })
+        .resolvedOptions().maximumFractionDigits;
+    } catch (e) { /* unbekannte Währung -> Default 2 */ }
+
+    const major = Number(li.totals[field]) / Math.pow(10, digits);
+    try {
+      return new Intl.NumberFormat(locale, {
+        style: 'currency',
+        currency: currency,
+        // Ganzzahlig -> keine Nachkommastellen; krummer Betrag (z. B. durch Steuer) -> beibehalten
+        minimumFractionDigits: Number.isInteger(major) ? 0 : digits,
+        maximumFractionDigits: digits
+      }).format(major);
+    } catch (e) {
+      // Fallback: Paddles vorformatierten String nehmen und nur reine Null-Nachkommastellen entfernen
+      return li.formattedTotals[field].replace(/([.,])0+(?=\D*$)/, '');
+    }
   }
 
   // Kauf-Buttons mit dem Paddle-Checkout (Overlay) verbinden — nur für konfigurierte Tiers
